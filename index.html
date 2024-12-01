@@ -1,3 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Tutorial for Kids</title>
+    <style>
+        /* Add basic styling here */
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Code Tutorial for Kids</h1>
+    </header>
+    
+    <main>
+        <section id="instructions">
+            <!-- Instructions will go here -->
+        </section>
+        
+        <section id="code-area">
+            <!-- Code editor will go here -->
+        </section>
+        
+        <section id="output">
+            <!-- Output area will go here -->
+        </section>
+        
+        <div class="controls">
+            <button id="run-code">Run Code</button>
+            <button id="show-hint">I Need a Hint!</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>Y4:0</p>
+    </footer>
+
+    <script src="script.js">
+        // Initialize variables
+        let currentStep = 0;
+        const steps = [
+            {
+                instructions: "Welcome! Let's start with a simple 'Hello World' program.",
+                code: "console.log('Hello World!');"
+            },
+            {
+                instructions: "Now, let's create a variable and print it.",
+                code: "let name = 'Alice'; console.log(name);"
+            }
+        ];
+        
+        // Function to display current step
+        function displayStep() {
+            const instructionsElement = document.getElementById('instructions');
+            const codeArea = document.querySelector('#code-area textarea');
+            
+            instructionsElement.textContent = steps[currentStep].instructions;
+            codeArea.value = steps[currentStep].code;
+        }
+        
+        // Function to run code
+        function runCode() {
+            // This function should execute the code in the code area
+            // For now, we'll just log it to the console
+            console.log(document.querySelector('#code-area textarea').value);
+        }
+        
+        // Function to show hint
+        function showHint() {
+            alert("Here's a hint: Remember to use semicolons at the end of each line!");
+        }
+        
+        // Initialize tutorial
+        displayStep();
+        
+        // Add event listeners
+        document.getElementById('run-code').addEventListener('click', runCode);
+        document.getElementById('show-hint').addEventListener('click', showHint);
+        
+        // Add completion flag
+        const footer = document.querySelector('footer');
+        footer.textContent = 'Y4:0'; // This will be updated based on user progress
+    </script>
+</body>
+</html>
 <!--
 <!DOCTYPE html>
 <html lang="en">
@@ -100,44 +186,3 @@
 </body>
 </html>
 -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code Tutorial for Kids</title>
-    <style>
-        /* Add basic styling here */
-    </style>
-</head>
-<body>
-    <header>
-        <h1>Code Tutorial for Kids</h1>
-    </header>
-    
-    <main>
-        <section id="instructions">
-            <!-- Instructions will go here -->
-        </section>
-        
-        <section id="code-area">
-            <!-- Code editor will go here -->
-        </section>
-        
-        <section id="output">
-            <!-- Output area will go here -->
-        </section>
-        
-        <div class="controls">
-            <button id="run-code">Run Code</button>
-            <button id="show-hint">I Need a Hint!</button>
-        </div>
-    </main>
-
-    <footer>
-        <p>Y4:0</p>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-</html>
