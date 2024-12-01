@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minecraft for Education</title>
     <style>
+        .hint-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
         .carousel-container {
             width: 80%;
             max-width: 600px;
@@ -13,6 +18,7 @@
             overflow: hidden;
             border: 1px solid #ccc;
             border-radius: 8px;
+            display: none;
         }
         .carousel-content {
             display: flex;
@@ -48,10 +54,12 @@
     </style>
 </head>
 <body>
-    <div class="carousel-container">
+    <button class="hint-button" onclick="toggleHint()">I need a hint</button>
+
+    <div class="carousel-container" id="carouselContainer">
         <div class="carousel-content" id="carouselContent">
             <div class="carousel-item">
-                <img src="https://media1.tenor.com/m/GjeGEmpn7jAAAAAC/happy-dance.gif" alt="Placeholder Image 1">
+                <img src="https://via.placeholder.com/300x200?text=Image+1" alt="Placeholder Image 1">
                 <p>This is your first hint with an image!</p>
             </div>
             <div class="carousel-item">
@@ -71,6 +79,15 @@
         let currentItem = 0;
         const carouselContent = document.getElementById("carouselContent");
         const items = document.querySelectorAll(".carousel-item");
+        const carouselContainer = document.getElementById("carouselContainer");
+
+        function toggleHint() {
+            if (carouselContainer.style.display === "none" || carouselContainer.style.display === "") {
+                carouselContainer.style.display = "block";
+            } else {
+                carouselContainer.style.display = "none";
+            }
+        }
 
         function scrollCarousel(direction) {
             currentItem += direction;
