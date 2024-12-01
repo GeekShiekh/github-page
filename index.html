@@ -3,68 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scrollable Hint Box</title>
+    <title>Image and Text Carousel</title>
     <style>
-        .hint-box {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-top: 10px;
-            display: none;
+        .carousel-container {
+            width: 80%;
+            max-width: 600px;
+            margin: 20px auto;
             position: relative;
+            overflow: hidden;
+            border: 1px solid #ccc;
+            border-radius: 8px;
         }
-        .hint-content {
+        .carousel-content {
             display: flex;
             transition: transform 0.3s ease;
         }
-        .hint {
+        .carousel-item {
             min-width: 100%;
-            padding: 0 20px;
+            padding: 20px;
             box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .carousel-item img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
         }
         .scroll-btn {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: #f0f0f0;
+            background: rgba(0,0,0,0.5);
+            color: white;
             border: none;
-            padding: 5px 10px;
+            padding: 10px 15px;
             cursor: pointer;
+            font-size: 18px;
         }
-        .scroll-btn.left { left: 0; }
-        .scroll-btn.right { right: 0; }
+        .scroll-btn.left { left: 10px; }
+        .scroll-btn.right { right: 10px; }
     </style>
 </head>
 <body>
-    <button onclick="toggleHint()">I need a hint</button>
-    <div id="hintBox" class="hint-box">
-        <div class="hint-content" id="hintContent">
-            <div class="hint"><p>This is your first hint!</p></div>
-            <div class="hint"><p>Here's a second hint for you.</p></div>
-            <div class="hint"><p>And a third hint if you need more help.</p></div>
+    <div class="carousel-container">
+        <div class="carousel-content" id="carouselContent">
+            <div class="carousel-item">
+                <img src="https://via.placeholder.com/300x200?text=Image+1" alt="Placeholder Image 1">
+                <p>This is your first hint with an image!</p>
+            </div>
+            <div class="carousel-item">
+                <img src="https://via.placeholder.com/300x200?text=Image+2" alt="Placeholder Image 2">
+                <p>Here's a second hint with another image.</p>
+            </div>
+            <div class="carousel-item">
+                <img src="https://via.placeholder.com/300x200?text=Image+3" alt="Placeholder Image 3">
+                <p>And a third hint if you need more help.</p>
+            </div>
         </div>
-        <button class="scroll-btn left" onclick="scrollHint(-1)">←</button>
-        <button class="scroll-btn right" onclick="scrollHint(1)">→</button>
+        <button class="scroll-btn left" onclick="scrollCarousel(-1)">←</button>
+        <button class="scroll-btn right" onclick="scrollCarousel(1)">→</button>
     </div>
 
     <script>
-        let currentHint = 0;
-        const hintContent = document.getElementById("hintContent");
-        const hints = document.querySelectorAll(".hint");
+        let currentItem = 0;
+        const carouselContent = document.getElementById("carouselContent");
+        const items = document.querySelectorAll(".carousel-item");
 
-        function toggleHint() {
-            var hintBox = document.getElementById("hintBox");
-            if (hintBox.style.display === "none" || hintBox.style.display === "") {
-                hintBox.style.display = "block";
-            } else {
-                hintBox.style.display = "none";
-            }
-        }
-
-        function scrollHint(direction) {
-            currentHint += direction;
-            if (currentHint < 0) currentHint = hints.length - 1;
-            if (currentHint >= hints.length) currentHint = 0;
-            hintContent.style.transform = `translateX(-${currentHint * 100}%)`;
+        function scrollCarousel(direction) {
+            currentItem += direction;
+            if (currentItem < 0) currentItem = items.length - 1;
+            if (currentItem >= items.length) currentItem = 0;
+            carouselContent.style.transform = `translateX(-${currentItem * 100}%)`;
         }
     </script>
 </body>
