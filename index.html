@@ -28,6 +28,18 @@
             padding: 20px;
             border-radius: 5px;
         }
+        .carousel {
+            width: 300px;
+            height: 200px;
+            overflow: hidden;
+        }
+        .carousel-item {
+            flex: 0 0 100%;
+            transition: transform 0.5s ease;
+        }
+        .active {
+            transform: translateX(100%);
+        }
         .controls {
             display: flex;
             justify-content: center;
@@ -66,9 +78,16 @@
             <!-- Output area will go here -->
         </section>
         
+        <div class="carousel">
+            <div class="carousel-item active">Y4:0</div>
+            <div class="carousel-item">Y4:1</div>
+            <div class="carousel-item">Y4:2</div>
+            <div class="carousel-item">Y4:3</div>
+        </div>
+        
         <div class="controls">
-            <button id="run-code">Run Code</button>
-            <button id="show-hint">I Need a Hint!</button>
+            <button id="prev-hint">Previous Hint</button>
+            <button id="next-hint">Next Hint</button>
         </div>
     </main>
 
@@ -117,13 +136,34 @@
             }
         }
 
+        function nextHint() {
+            const carouselItems = document.querySelectorAll('.carousel-item');
+            const activeItemIndex = Array.from(carouselItems).indexOf(document.querySelector('.active'));
+            const nextIndex = (activeItemIndex + 1) % carouselItems.length;
+            carouselItems[activeItemIndex].classList.remove('active');
+            carouselItems[nextIndex].classList.add('active');
+        }
+
+        function prevHint() {
+            const carouselItems = document.querySelectorAll('.carousel-item');
+            const activeItemIndex = Array.from(carouselItems).indexOf(document.querySelector('.active'));
+            const prevIndex = (activeItemIndex + carouselItems.length - 1) % carouselItems.length;
+            carouselItems[activeItemIndex].classList.remove('active');
+            carouselItems[prevIndex].classList.add('active');
+        }
+
         displayStep();
 
         document.getElementById('run-code').addEventListener('click', runCode);
         document.getElementById('show-hint').addEventListener('click', showHint);
+        document.getElementById('prev-hint').addEventListener('click', prevHint);
+        document.getElementById('next-hint').addEventListener('click', nextHint);
+
+        setInterval(nextHint, 3000); // Automatically show next hint every 3 seconds
     </script>
 </body>
 </html>
+
 
 <!--
 <!DOCTYPE html>
