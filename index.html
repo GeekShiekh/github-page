@@ -1,1 +1,34 @@
-<h1>Hello World!</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hint Box Example</title>
+    <style>
+        .hint-box {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hello World!</h1>
+    <button onclick="toggleHint()">I need a hint</button>
+    <div id="hintBox" class="hint-box">
+        <p>This is your hint!</p>
+    </div>
+
+    <script>
+        function toggleHint() {
+            var hintBox = document.getElementById("hintBox");
+            if (hintBox.style.display === "none" || hintBox.style.display === "") {
+                hintBox.style.display = "block";
+            } else {
+                hintBox.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
