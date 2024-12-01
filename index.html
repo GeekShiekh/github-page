@@ -5,21 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Code Tutorial for Kids</title>
     <style>
-        /* Add basic styling here */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        section {
+            background: #f4f4f4;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        button {
+            padding: 10px 15px;
+            background: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
     <header>
         <h1>Code Tutorial for Kids</h1>
     </header>
-    
+
     <main>
         <section id="instructions">
             <!-- Instructions will go here -->
         </section>
         
         <section id="code-area">
-            <!-- Code editor will go here -->
+            <textarea id="code-input" rows="5" cols="50"></textarea>
         </section>
         
         <section id="output">
@@ -36,8 +76,7 @@
         <p>Y4:0</p>
     </footer>
 
-    <script src="script.js">
-        // Initialize variables
+    <script>
         let currentStep = 0;
         const steps = [
             {
@@ -49,41 +88,43 @@
                 code: "let name = 'Alice'; console.log(name);"
             }
         ];
-        
-        // Function to display current step
+
         function displayStep() {
             const instructionsElement = document.getElementById('instructions');
-            const codeArea = document.querySelector('#code-area textarea');
+            const codeInput = document.querySelector('#code-input');
             
             instructionsElement.textContent = steps[currentStep].instructions;
-            codeArea.value = steps[currentStep].code;
+            codeInput.value = steps[currentStep].code;
         }
-        
-        // Function to run code
+
         function runCode() {
-            // This function should execute the code in the code area
-            // For now, we'll just log it to the console
-            console.log(document.querySelector('#code-area textarea').value);
+            console.log(document.querySelector('#code-input').value);
+            currentStep++;
+            displayStep();
+            updateCompletionFlag();
         }
-        
-        // Function to show hint
+
         function showHint() {
             alert("Here's a hint: Remember to use semicolons at the end of each line!");
         }
-        
-        // Initialize tutorial
+
+        function updateCompletionFlag() {
+            const footer = document.querySelector('footer');
+            if (currentStep === steps.length - 1) {
+                footer.textContent = 'Y4:0'; // Set to completion flag when finished
+            } else {
+                footer.textContent = 'Y4:' + currentStep; // Update step number
+            }
+        }
+
         displayStep();
-        
-        // Add event listeners
+
         document.getElementById('run-code').addEventListener('click', runCode);
         document.getElementById('show-hint').addEventListener('click', showHint);
-        
-        // Add completion flag
-        const footer = document.querySelector('footer');
-        footer.textContent = 'Y4:0'; // This will be updated based on user progress
     </script>
 </body>
 </html>
+
 <!--
 <!DOCTYPE html>
 <html lang="en">
