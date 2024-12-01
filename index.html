@@ -3,24 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hint Box Example</title>
+    <title>Scrollable Hint Box</title>
     <style>
         .hint-box {
             border: 1px solid #ccc;
             padding: 10px;
             margin-top: 10px;
             display: none;
+            position: relative;
         }
+        .hint-content {
+            display: flex;
+            transition: transform 0.3s ease;
+        }
+        .hint {
+            min-width: 100%;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+        .scroll-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #f0f0f0;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .scroll-btn.left { left: 0; }
+        .scroll-btn.right { right: 0; }
     </style>
 </head>
 <body>
-    <h1>Hello World!</h1>
     <button onclick="toggleHint()">I need a hint</button>
     <div id="hintBox" class="hint-box">
-        <p>This is your hint!</p>
+        <div class="hint-content" id="hintContent">
+            <div class="hint"><p>This is your first hint!</p></div>
+            <div class="hint"><p>Here's a second hint for you.</p></div>
+            <div class="hint"><p>And a third hint if you need more help.</p></div>
+        </div>
+        <button class="scroll-btn left" onclick="scrollHint(-1)">←</button>
+        <button class="scroll-btn right" onclick="scrollHint(1)">→</button>
     </div>
 
     <script>
+        let currentHint = 0;
+        const hintContent = document.getElementById("hintContent");
+        const hints = document.querySelectorAll(".hint");
+
         function toggleHint() {
             var hintBox = document.getElementById("hintBox");
             if (hintBox.style.display === "none" || hintBox.style.display === "") {
@@ -28,6 +58,13 @@
             } else {
                 hintBox.style.display = "none";
             }
+        }
+
+        function scrollHint(direction) {
+            currentHint += direction;
+            if (currentHint < 0) currentHint = hints.length - 1;
+            if (currentHint >= hints.length) currentHint = 0;
+            hintContent.style.transform = `translateX(-${currentHint * 100}%)`;
         }
     </script>
 </body>
